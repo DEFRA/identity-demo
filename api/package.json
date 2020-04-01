@@ -1,0 +1,27 @@
+{
+  "name": "identity-demo-api",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "start": "node index.js",
+    "unit-test": "lab -c -r console -o stdout -r lcov -o lcov.info",
+    "test": "npm run lint && npm run unit-test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/boom": "9.1.0",
+    "@hapi/hapi": "19.1.1",
+    "@hapi/joi": "17.1.1",
+    "hapi-pino": "6.5.0"
+  },
+  "devDependencies": {
+    "@hapi/code": "8.0.1",
+    "@hapi/lab": "22.0.4",
+    "blipp": "4.0.1",
+    "codeclimate-test-reporter": "0.5.1",
+    "standard": "14.3.3"
+  }
+}

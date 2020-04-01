@@ -1,6 +1,6 @@
 const hapi = require('@hapi/hapi')
 const config = require('./config')
-const { clientId, clientSecret, discoveryUrl, callbackUrl } = config.auth
+// const { clientId, clientSecret, discoveryUrl, callbackUrl } = config.auth
 
 async function createServer () {
   // Create the hapi server
@@ -20,22 +20,36 @@ async function createServer () {
 
   // Register the plugins
   await server.register(require('@hapi/inert'))
+  await server.register(require('@hapi/cookie'))
   await server.register(require('./plugins/views'))
   await server.register({
-    plugin: require('./plugins/auth'),
-    options: { clientId, clientSecret, discoveryUrl, callbackUrl }
+    plugin: require('./plugins/oidc'),
+    options: config.auth
   })
 
-  server.auth.strategy('oidc', 'oidc', {
-    password: 'cookie_encryption_password_secure'
-  })
+  // server.auth.strategy('oidc', 'oidc', {
+  //   password: 'cookie_encryption_password_secure'
+  // })
 
-  server.auth.default('oidc')
-
-  await server.register(require('./plugins/router'))
   await server.register(require('./plugins/error-pages'))
   await server.register(require('./plugins/logging'))
   await server.register(require('blipp'))
+
+  server.auth.strategy('session', 'cookie', {
+    cookie: {
+      name: 'sessionid',
+      path: '/',
+      password: 'cookie_encryption_password_secure_fgbvx3rdeida',
+      isSecure: false,
+      isSameSite: 'Lax'
+    },
+    appendNext: 'redirectTo',
+    redirectTo: '/login'
+    // validateFunc
+  })
+  server.auth.default('session')
+
+  await server.register(require('./plugins/router'))
 
   // Add auth credentials to the page context
   server.ext('onPreResponse', (request, h) => {

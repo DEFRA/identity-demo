@@ -1,8 +1,7 @@
 const boom = require('@hapi/boom')
 const { Issuer } = require('openid-client')
-// const config = require('../config')
-// const { callbackUrl } = config.auth
 const shortId = () => Math.random().toString(36).substring(2)
+
 module.exports = {
   plugin: {
     name: 'oidc',
@@ -42,22 +41,22 @@ module.exports = {
         {
           method: 'get',
           path: '/login',
+          handler: async (request, h) => {
+            const state = shortId()
+            const scope = 'openid profile'
+
+            const redirectUrl = client.authorizationUrl({
+              redirect_uri: callbackUrl,
+              scope,
+              state
+            })
+
+            h.state('oidc', { state })
+
+            return h.redirect(redirectUrl).takeover()
+          },
           options: {
-            auth: false,
-            handler: async (request, h) => {
-              const state = shortId()
-              const scope = 'openid profile'
-
-              const redirectUrl = client.authorizationUrl({
-                redirect_uri: callbackUrl,
-                scope,
-                state
-              })
-
-              h.state('oidc', { state })
-
-              return h.redirect(redirectUrl).takeover()
-            }
+            auth: false
           }
         },
         {
@@ -87,12 +86,12 @@ module.exports = {
         {
           method: 'get',
           path: '/logout',
+          handler: function (request, h) {
+            request.cookieAuth.clear()
+            return h.redirect('/')
+          },
           options: {
-            auth: false,
-            handler: function (request, h) {
-              request.cookieAuth.clear()
-              return h.redirect('/')
-            }
+            auth: false
           }
         }
       ])

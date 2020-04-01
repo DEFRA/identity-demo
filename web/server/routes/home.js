@@ -1,5 +1,3 @@
-const joi = require('@hapi/joi')
-
 module.exports = [
   {
     method: 'GET',
@@ -11,7 +9,9 @@ module.exports = [
       })
     },
     options: {
-      auth: false
+      auth: {
+        mode: 'optional'
+      }
     }
   }
 ]

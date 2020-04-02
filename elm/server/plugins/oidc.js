@@ -43,7 +43,7 @@ module.exports = {
           path: '/login',
           handler: async (request, h) => {
             const state = shortId()
-            const scope = 'openid profile'
+            const scope = 'openid profile permissions roles'
 
             const redirectUrl = client.authorizationUrl({
               redirect_uri: callbackUrl,

@@ -7,10 +7,10 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Web",
-      "cwd": "${workspaceFolder}/web",
-      "program": "${workspaceFolder}/web/index.js",
-      "envFile": "${workspaceFolder}/web/.env"
+      "name": "Launch Elm",
+      "cwd": "${workspaceFolder}/elm",
+      "program": "${workspaceFolder}/elm/index.js",
+      "envFile": "${workspaceFolder}/elm/.env"
     },
     {
       "type": "node",

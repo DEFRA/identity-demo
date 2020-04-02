@@ -1,17 +1,12 @@
 module.exports = [
   {
     method: 'GET',
-    path: '/',
+    path: '/protected',
     handler: (request, h) => {
       return h.view('home', {
         title: 'Hello',
         message: 'World'
       })
-    },
-    options: {
-      auth: {
-        mode: 'try'
-      }
     }
   }
 ]

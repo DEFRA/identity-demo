@@ -10,7 +10,7 @@ module.exports = [
     },
     options: {
       auth: {
-        mode: 'try'
+        mode: 'optional'
       }
     }
   }

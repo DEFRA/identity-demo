@@ -15,6 +15,14 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Launch Grants",
+      "cwd": "${workspaceFolder}/grants",
+      "program": "${workspaceFolder}/grants/index.js",
+      "envFile": "${workspaceFolder}/grants/.env"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch Api",
       "cwd": "${workspaceFolder}/api",
       "program": "${workspaceFolder}/api/index.js",

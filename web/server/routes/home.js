@@ -3,14 +3,11 @@ module.exports = [
     method: 'GET',
     path: '/',
     handler: (request, h) => {
-      return h.view('home', {
-        title: 'Hello',
-        message: 'World'
-      })
+      return h.view('home')
     },
     options: {
       auth: {
-        mode: 'optional'
+        mode: 'try'
       }
     }
   }

@@ -7,26 +7,18 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Elm",
-      "cwd": "${workspaceFolder}/elm",
-      "program": "${workspaceFolder}/elm/index.js",
-      "envFile": "${workspaceFolder}/elm/.env"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Grants",
-      "cwd": "${workspaceFolder}/grants",
-      "program": "${workspaceFolder}/grants/index.js",
-      "envFile": "${workspaceFolder}/grants/.env"
-    },
-    {
-      "type": "node",
-      "request": "launch",
       "name": "Launch Web (Elm)",
       "cwd": "${workspaceFolder}/web",
       "program": "${workspaceFolder}/web/index.js",
       "envFile": "${workspaceFolder}/web/.elm.env"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Web (Grants)",
+      "cwd": "${workspaceFolder}/web",
+      "program": "${workspaceFolder}/web/index.js",
+      "envFile": "${workspaceFolder}/web/.grants.env"
     },
     {
       "type": "node",

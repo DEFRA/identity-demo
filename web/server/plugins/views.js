@@ -2,7 +2,6 @@ const path = require('path')
 const nunjucks = require('nunjucks')
 const config = require('../config')
 const pkg = require('../../package.json')
-const analyticsAccount = config.analyticsAccount
 
 module.exports = {
   plugin: require('@hapi/vision'),
@@ -36,9 +35,8 @@ module.exports = {
     context: {
       appVersion: pkg.version,
       assetPath: '/assets',
-      serviceName: 'Elm Demo',
-      pageTitle: 'Elm Demo - GOV.UK',
-      analyticsAccount: analyticsAccount
+      serviceName: config.name,
+      pageTitle: `${config.name} Demo - GOV.UK`
     }
   }
 }

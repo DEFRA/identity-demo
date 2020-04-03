@@ -1,6 +1,5 @@
 const hapi = require('@hapi/hapi')
 const config = require('./config')
-// const { clientId, clientSecret, discoveryUrl, callbackUrl } = config.auth
 
 async function createServer () {
   // Create the hapi server
@@ -22,16 +21,8 @@ async function createServer () {
   // Register the plugins
   await server.register(require('@hapi/inert'))
   await server.register(require('@hapi/cookie'))
+  await server.register(require('@hapi/bell'))
   await server.register(require('./plugins/views'))
-  await server.register({
-    plugin: require('./plugins/oidc'),
-    options: config.auth
-  })
-
-  // server.auth.strategy('oidc', 'oidc', {
-  //   password: 'cookie_encryption_password_secure'
-  // })
-
   await server.register(require('./plugins/error-pages'))
   await server.register(require('./plugins/logging'))
   await server.register(require('blipp'))
@@ -48,7 +39,22 @@ async function createServer () {
     redirectTo: '/login'
     // validateFunc
   })
+
   server.auth.default('session')
+
+  server.auth.strategy('auth0', 'bell', {
+    provider: 'auth0',
+    config: {
+      domain: config.domain
+    },
+    providerParams: {
+      audience: config.audience
+    },
+    password: 'cookie_encryption_password_secure',
+    isSecure: false,
+    clientId: config.clientId,
+    clientSecret: config.clientSecret
+  })
 
   await server.register(require('./plugins/router'))
 

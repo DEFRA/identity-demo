@@ -58,7 +58,7 @@ module.exports = {
           jwksUri: `https://${auth0Domain}/.well-known/jwks.json`
         }),
         verifyOptions: {
-          audience: 'https://near-life.tech',
+          audience: 'https://defra.auth0.com',
           issuer: `https://${auth0Domain}/`,
           algorithms: ['RS256']
         },

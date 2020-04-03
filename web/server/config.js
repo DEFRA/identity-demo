@@ -6,12 +6,11 @@ const schema = joi.object().keys({
   host: joi.string().default('localhost'),
   port: joi.number().default(3000),
   env: joi.string().valid(...envs).default(envs[0]),
-  auth: joi.object().keys({
-    clientId: joi.string().required(),
-    clientSecret: joi.string().required(),
-    discoveryUrl: joi.string().uri().required(),
-    callbackUrl: joi.string().uri().required()
-  }).required()
+  name: joi.string().required(),
+  domain: joi.string().required(),
+  audience: joi.string().required(),
+  clientId: joi.string().required(),
+  clientSecret: joi.string().required()
 })
 
 // Build config
@@ -19,12 +18,11 @@ const config = {
   host: process.env.HOST,
   port: process.env.PORT,
   env: process.env.NODE_ENV,
-  auth: {
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    discoveryUrl: process.env.DISCOVERY_URL,
-    callbackUrl: process.env.CALLBACK_URL
-  }
+  name: process.env.NAME,
+  domain: process.env.DOMAIN,
+  audience: process.env.AUDIENCE,
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET
 }
 
 // Validate config

@@ -1,7 +1,0 @@
-.DS_Store
-.vscode
-node_modules
-npm-debug.log
-server/public/build
-lcov.info
-.env

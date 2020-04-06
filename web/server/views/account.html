@@ -17,4 +17,9 @@
     <pre><code>{{ auth | dump(2) | safe }}{{ meta | dump(2) | safe }}</code></pre>
   </div>
 </details>
+
+<form method="POST">
+  <button class="govuk-button">Make API request</button>
+  <pre><code>{{ apiResponse | dump(2) | safe }}</code></pre>
+</form>
 {% endblock %}

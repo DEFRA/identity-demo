@@ -1,44 +1,29 @@
-const jwt = require('hapi-auth-jwt2')
 const jwksRsa = require('jwks-rsa')
+const jwt = require('hapi-auth-jwt2')
+const { audience, domain } = require('../config')
 
 module.exports = {
   plugin: {
     name: 'auth',
     register: async (server, options) => {
-      const { auth0Domain } = options
-
       await server.register(jwt)
 
       const validate = async (decoded, request) => {
-        const namespace = 'https://defra.net'
+        const namespace = `https://${domain}`
 
         if (decoded && decoded.sub) {
-          const authz = decoded[`${namespace}/authz`]
-          const userId = decoded[`${namespace}/userId`]
-          const { tenantId } = request.params
+          const permissions = decoded[`${namespace}/permissions`]
+          const groups = decoded[`${namespace}/groups`]
+          const roles = decoded[`${namespace}/roles`]
 
-          if (Array.isArray(authz)) {
-            if (tenantId) {
-              const tenant = authz.find(t => t.tenantId === +tenantId)
-
-              return {
-                isValid: true,
-                credentials: {
-                  userId,
-                  tenant,
-                  scope: tenant && tenant.permissions,
-                  token: decoded
-                }
-              }
-            } else {
-              return {
-                isValid: true,
-                credentials: {
-                  userId,
-                  scope: [],
-                  token: decoded
-                }
-              }
+          return {
+            isValid: true,
+            credentials: {
+              permissions,
+              groups,
+              roles,
+              // scope: tenant && tenant.permissions,
+              token: decoded
             }
           }
         }
@@ -55,11 +40,11 @@ module.exports = {
           cache: true,
           rateLimit: true,
           jwksRequestsPerMinute: 5,
-          jwksUri: `https://${auth0Domain}/.well-known/jwks.json`
+          jwksUri: `https://${domain}/.well-known/jwks.json`
         }),
         verifyOptions: {
-          audience: 'https://defra.auth0.com',
-          issuer: `https://${auth0Domain}/`,
+          audience: audience,
+          issuer: `https://${domain}/`,
           algorithms: ['RS256']
         },
         validate

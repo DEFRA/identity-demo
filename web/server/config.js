@@ -10,7 +10,8 @@ const schema = joi.object().keys({
   domain: joi.string().required(),
   audience: joi.string().required(),
   clientId: joi.string().required(),
-  clientSecret: joi.string().required()
+  clientSecret: joi.string().required(),
+  api: joi.string().uri().required()
 })
 
 // Build config
@@ -22,7 +23,8 @@ const config = {
   domain: process.env.DOMAIN,
   audience: process.env.AUDIENCE,
   clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET
+  clientSecret: process.env.CLIENT_SECRET,
+  api: process.env.API
 }
 
 // Validate config

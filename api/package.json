@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:elm": "export $(cat .elm.env | xargs) && node index.js",
+    "start:grants": "export $(cat .grants.env | xargs) && node index.js",
     "lint": "standard",
-    "start": "node index.js",
     "unit-test": "lab -c -r console -o stdout -r lcov -o lcov.info",
     "test": "npm run lint && npm run unit-test"
   },
@@ -15,7 +16,9 @@
     "@hapi/boom": "9.1.0",
     "@hapi/hapi": "19.1.1",
     "@hapi/joi": "17.1.1",
-    "hapi-pino": "6.5.0"
+    "hapi-auth-jwt2": "^10.0.0",
+    "hapi-pino": "6.5.0",
+    "jwks-rsa": "^1.7.0"
   },
   "devDependencies": {
     "@hapi/code": "8.0.1",

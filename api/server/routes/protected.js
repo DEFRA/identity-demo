@@ -3,7 +3,8 @@ module.exports = {
   path: '/protected',
   handler: (request, h) => {
     return {
-      ok: 200
+      ok: 200,
+      timestamp: new Date()
     }
   }
 }

@@ -1,11 +1,11 @@
+const config = require('../config')
+
 module.exports = [
   {
     method: 'GET',
     path: '/',
     handler: (request, h) => {
-      return {
-        hello: 'world'
-      }
+      return config
     },
     options: {
       auth: false

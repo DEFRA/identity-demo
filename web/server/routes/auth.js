@@ -19,6 +19,10 @@ module.exports = [
         profile: credentials.profile
       })
 
+      // Set cookie to expire at the same time as the token
+      // TODO: Get refreshTokens isssuing?
+      request.cookieAuth.ttl(request.auth.credentials.expiresIn * 1000)
+
       return h.redirect('/account')
     },
     options: {

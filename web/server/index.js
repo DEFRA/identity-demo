@@ -47,6 +47,7 @@ async function createServer () {
     config: {
       domain: config.domain
     },
+    scope: ['openid', 'profile', 'email', 'offline_access'],
     providerParams: {
       audience: config.audience
     },

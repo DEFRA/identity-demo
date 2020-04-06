@@ -4,6 +4,7 @@ const config = require('./config')
 async function createServer () {
   // Create the hapi server
   const server = hapi.server({
+    host: config.host,
     port: config.port,
     routes: {
       auth: {
@@ -23,8 +24,6 @@ async function createServer () {
   await server.register(require('./plugins/log-errors'))
   await server.register(require('./plugins/logging'))
   await server.register(require('blipp'))
-
-  server.auth.default('jwt')
 
   return server
 }

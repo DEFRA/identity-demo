@@ -1,5 +1,6 @@
 Identity demo
 -------------
+-------------
 
 Example using auth0 and hapi to demonstrate:
 
@@ -8,10 +9,26 @@ Example using auth0 and hapi to demonstrate:
 - How using the `audience` we can use these tokens to securely call an API
 - How to embelish a JWT in an OpenID connect conformant way using namespaces for roles & permissions
 
-[logo]: ./identity-demo.png "Identity demo"
+![logo](./identity-demo.png) Identity demo
+
+Running the application
+-----------------------
+
+First obtain the 4 `.env` files.
+
+There are two example web servers (Elm Web and Grants Web) and two api servers (Elm API and Grants API).
+
+`$ cd web`
+`$ npm run start:elm`
+`$ npm run start:grants`
 
 
-Links:
+`$ cd api`
+`$ npm run start:api`
+`$ npm run start:grants`
+
+Links
+-----
 https://auth0.com/docs/architecture-scenarios/web-app-sso/part-1#authentication-flow
 
 Call API Using the `Authorization Code Flow`

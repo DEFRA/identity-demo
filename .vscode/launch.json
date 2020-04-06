@@ -23,10 +23,18 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Api",
+      "name": "Launch Api (Elm)",
       "cwd": "${workspaceFolder}/api",
       "program": "${workspaceFolder}/api/index.js",
-      "envFile": "${workspaceFolder}/api/.env"
+      "envFile": "${workspaceFolder}/api/.elm.env"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Api (Grants)",
+      "cwd": "${workspaceFolder}/api",
+      "program": "${workspaceFolder}/api/index.js",
+      "envFile": "${workspaceFolder}/api/.grants.env"
     }
   ]
 }

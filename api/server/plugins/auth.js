@@ -9,20 +9,18 @@ module.exports = {
       await server.register(jwt)
 
       const validate = async (decoded, request) => {
-        const namespace = `https://${domain}`
+        const namespace = 'https://defra.com'
 
         if (decoded && decoded.sub) {
           const permissions = decoded[`${namespace}/permissions`]
-          const groups = decoded[`${namespace}/groups`]
           const roles = decoded[`${namespace}/roles`]
 
           return {
             isValid: true,
             credentials: {
               permissions,
-              groups,
               roles,
-              // scope: tenant && tenant.permissions,
+              scope: permissions,
               token: decoded
             }
           }

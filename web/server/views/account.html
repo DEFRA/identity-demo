@@ -18,8 +18,13 @@
   </div>
 </details>
 
-<form method="POST">
+<form method="GET" action="/account/access">
   <button class="govuk-button">Make API request</button>
-  <pre><code>{{ apiResponse | dump(2) | safe }}</code></pre>
+  <pre><code>{{ apiGetResponse | dump(2) | safe }}</code></pre>
+</form>
+
+<form method="GET" action="/account/delete">
+  <button class="govuk-button">Make API request (delete permission required)</button>
+  <pre><code>{{ apiDeleteResponse | dump(2) | safe }}</code></pre>
 </form>
 {% endblock %}

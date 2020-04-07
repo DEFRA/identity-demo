@@ -27,6 +27,25 @@ async function createServer () {
   await server.register(require('./plugins/logging'))
   await server.register(require('blipp'))
 
+  // Validated the cookie each request
+  // Usually this would be implemented
+  // Calls to ensure the permissions etc. are still correct
+  // and dynamic scopes are set.
+  const validateFunc = async (request, session) => {
+    if (!session) {
+      return {
+        valid: false
+      }
+    }
+
+    const rtn = {
+      valid: true,
+      credentials: session
+    }
+
+    return rtn
+  }
+
   server.auth.strategy('session', 'cookie', {
     cookie: {
       name: 'sessionid',
@@ -36,8 +55,8 @@ async function createServer () {
       isSameSite: 'Lax'
     },
     appendNext: 'redirectTo',
-    redirectTo: '/login'
-    // validateFunc
+    redirectTo: '/login',
+    validateFunc
   })
 
   server.auth.default('session')
@@ -47,7 +66,7 @@ async function createServer () {
     config: {
       domain: config.domain
     },
-    scope: ['openid', 'profile', 'email', 'offline_access'],
+    scope: ['openid', 'profile', 'email', 'offline_access'], // TODO: offline_access should return resfreshTokens - it doesn't
     providerParams: {
       audience: config.audience
     },

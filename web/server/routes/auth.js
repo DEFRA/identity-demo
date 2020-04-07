@@ -12,11 +12,18 @@ module.exports = [
       console.log('authenticated', request.auth.credentials)
 
       // Set the session
-      const { credentials, artifacts } = request.auth
+      const { credentials, artifacts: token } = request.auth
+      const { displayName, email, id } = credentials.profile
+      const namespace = 'https://defra.com'
+      const raw = credentials.profile.raw
+      const roles = raw[`${namespace}/roles`]
+      const permissions = raw[`${namespace}/permissions`]
+      const profile = { displayName, email, id, roles, permissions }
 
       request.cookieAuth.set({
-        token: artifacts,
-        profile: credentials.profile
+        token,
+        profile,
+        scope: permissions
       })
 
       // Set cookie to expire at the same time as the token

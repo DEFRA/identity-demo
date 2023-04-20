@@ -28,7 +28,7 @@
     "blipp": "4.0.1",
     "govuk-frontend": "3.6.0",
     "hapi-pino": "6.5.0",
-    "nunjucks": "3.2.1",
+    "nunjucks": "3.2.4",
     "openid-client": "3.14.1"
   },
   "devDependencies": {
